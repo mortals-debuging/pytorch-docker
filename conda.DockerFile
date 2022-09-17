@@ -11,25 +11,23 @@ WORKDIR $CODEDIR
 RUN rm -f /etc/apt/sources.list.d/*.list
 
 # Install some basic utilities
-RUN apt-get update && apt-get -y install sudo git vim traceroute inetutils-ping net-tools curl fontconfig\
+RUN apt-get update --fix-missing && apt-get -y install sudo git vim traceroute inetutils-ping net-tools curl fontconfig\
     libgl1 libglib2.0-dev libfontconfig libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0  \
     libxcb-shape0 libxcb-xfixes0 libxcb-xinerama0 libxcb-xkb1 libxkbcommon-x11-0 libfontconfig1 libdbus-1-3 libx11-6 \
+    openssh-server htop\
     && DEBIAN_FRONTEND=noninteractive apt-get -y install tcl-dev tk-dev python-tk python3-tk\
     && rm -rf /var/lib/apt/lists/* && rm -f /etc/apt/sources.list.d/*.list
-
-RUN pip uninstall -y matplotlib && pip install matplotlib
 
 RUN mkdir /usr/share/fonts/userFonts
 COPY ./fonts /usr/share/fonts/userFonts
 RUN fc-cache -fv
 
 RUN pip install pyqt5 pyqt5_tools  &&  \
-    pip install tornado tensorboard  \
+    pip install tornado tensorboard matplotlib \
     visdom imutils matplotlib jupyter jupyter-tensorboard pandas jieba xlrd xlwt openpyxl
 
 COPY jupyter.sh /usr/bin/
 
 LABEL maintainer="LiJianying <lijianying1998@gmail.com>"
 
-VOLUME ["tmp/data/new"]
 CMD ["/bin/bash"]

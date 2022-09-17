@@ -17,10 +17,10 @@ WORKDIR $CODEDIR
 RUN rm -f /etc/apt/sources.list.d/*.list
 
 # Install some basic utilities
-RUN apt-get update && apt-get -y --no-install-recommends install sudo git vim traceroute inetutils-ping net-tools curl fontconfig\
+RUN apt-get update --fix-missing&& apt-get -y --no-install-recommends install sudo git vim traceroute inetutils-ping net-tools curl fontconfig\
     libgl1 libglib2.0-dev libfontconfig libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0  \
     libxcb-shape0 libxcb-xfixes0 libxcb-xinerama0 libxcb-xkb1 libxkbcommon-x11-0 libfontconfig1 libdbus-1-3 libx11-6 \
-    openssh-server
+    openssh-server htop
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install tcl-dev tk-dev python-tk python3-tk python3.8 python3-pip\
     && ln -s /usr/bin/python3 /usr/bin/python\
