@@ -26,8 +26,9 @@ RUN pip install pyqt5 pyqt5_tools  &&  \
     pip install tornado tensorboard matplotlib \
     visdom imutils matplotlib jupyter jupyter-tensorboard pandas jieba xlrd xlwt openpyxl
 
-COPY jupyter.sh /usr/bin/
+COPY *.sh /usr/bin/
 
 LABEL maintainer="LiJianying <lijianying1998@gmail.com>"
 
+VOLUME ["tmp/data/new"]
 CMD ["/bin/bash"]
