@@ -24,18 +24,28 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install tcl-dev tk-dev python-tk p
     && ln -s /usr/bin/python3 /usr/bin/python\
     && rm -f /etc/apt/sources.list.d/*.list
 
-COPY requirements.txt $CODEDIR
-# install python packages
-RUN python3 -m pip install -r requirements.txt && rm $CODEDIR/requirements.txt
-
-# install pytorch
-RUN python3 -m pip install torch==1.11.0+cu113 torchvision==0.12.0+cu113 torchtext==0.12.0 --extra-index-url https://download.pytorch.org/whl/cu113
-
 RUN mkdir /usr/share/fonts/userFonts
 COPY ./fonts /usr/share/fonts/userFonts
 RUN fc-cache -fv
 
-COPY *.sh /usr/bin/
+COPY sshstart.sh /usr/bin/
+
+# Install conda
+RUN wget https://repo.anaconda.com/miniconda/Miniconda3-py38_23.1.0-1-Linux-x86_64.sh --output-document=miniconda.sh\
+    && bash miniconda.sh -b -p /opt/conda && rm -f miniconda.sh
+
+RUN /opt/conda/bin/conda clean -tipsy && \
+    ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
+    echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
+    echo "conda activate mono" >> ~/.bashrc \
+
+ENV PATH /opt/conda/bin:$PATH
+
+RUN conda create -n mono python=3.8 -y
+
+RUN ./root/.bashrc && \
+    /opt/conda/bin/conda init bash && \
+    conda activate mono && conda info --envs
 
 LABEL maintainer="LiJianying <lijianying1998@gmail.com>"
 
