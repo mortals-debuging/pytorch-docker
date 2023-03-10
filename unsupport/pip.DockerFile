@@ -24,7 +24,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install tcl-dev tk-dev python-tk p
     && ln -s /usr/bin/python3 /usr/bin/python\
     && rm -f /etc/apt/sources.list.d/*.list
 
-COPY requirements.txt $CODEDIR
+COPY ../requirements.txt $CODEDIR
 # install python packages
 RUN python3 -m pip install -r requirements.txt && rm $CODEDIR/requirements.txt
 
@@ -32,7 +32,7 @@ RUN python3 -m pip install -r requirements.txt && rm $CODEDIR/requirements.txt
 RUN python3 -m pip install torch==1.11.0+cu113 torchvision==0.12.0+cu113 torchtext==0.12.0 --extra-index-url https://download.pytorch.org/whl/cu113
 
 RUN mkdir /usr/share/fonts/userFonts
-COPY ./fonts /usr/share/fonts/userFonts
+COPY ../fonts /usr/share/fonts/userFonts
 RUN fc-cache -fv
 
 COPY *.sh /usr/bin/
