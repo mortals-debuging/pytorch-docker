@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" remoteFilesAllowedToDisappearOnAutoupload="false">
+  <component name="PublishConfigData">
     <serverData>
-      <paths name="fengjialin_214712169@122.207.108.1:62000 password">
+      <paths name="autoDL">
         <serverdata>
           <mappings>
-            <mapping deploy="/home/fengjialin_214712169/355/78979" local="$PROJECT_DIR$" />
+            <mapping local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>
-      <paths name="root@region-3.autodl.com:40826 password">
+      <paths name="fengjialin_214712169@122.207.108.1:62000 password">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="maxin_204712154@122.207.108.1:62000 password">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />
@@ -17,6 +24,5 @@
         </serverdata>
       </paths>
     </serverData>
-    <option name="myAutoUpload" value="ALWAYS" />
   </component>
 </project>
