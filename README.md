@@ -2,7 +2,7 @@
 ### Tools Version Detail
 - Python version 3.8(Linux)
 - Pytorch version 1.11.0
-- Cuda version 11.3
+- Cuda version 12.0
 - Cudnn version 8
 
 &nbsp;

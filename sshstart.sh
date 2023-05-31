@@ -1,8 +1,8 @@
 #!/bin/bash
 
-if (cat /etc/ssh/ssh_config|grep "^    PermitRootLogin yes" >NP); then cd .; else  sed -i "$ a \    PermitRootLogin yes" /etc/ssh/sshd_config; fi
-if (cat /etc/ssh/ssh_config|grep "^    UsePAM no">NP); then cd .; else  sed -i "$ a \    UsePAM no" /etc/ssh/sshd_config; fi
-if (cat ~/.bashrc|grep "^service ssh start">NP); then
+if (cat /etc/ssh/ssh_config|grep "^    PermitRootLogin yes"); then cd .; else  sed -i "$ a \    PermitRootLogin yes" /etc/ssh/sshd_config; fi
+if (cat /etc/ssh/ssh_config|grep "^    UsePAM no"); then cd .; else  sed -i "$ a \    UsePAM no" /etc/ssh/sshd_config; fi
+if (cat ~/.bashrc|grep "^ \service ssh start"); then
   cd .;
   else
     sed -i "$ a \service ssh start" ~/.bashrc
