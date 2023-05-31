@@ -33,7 +33,7 @@ RUN apt-get update --fix-missing && apt-get upgrade -y  \
 
 COPY requirements.txt ./
 RUN pip install -r requirements.txt && rm ./requirements.txt
-COPY *.sh /usr/local/bin
+COPY *.sh /usr/local/bin/
 
 # Install conda
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-py39_23.1.0-1-Linux-x86_64.sh --output-document=miniconda.sh\

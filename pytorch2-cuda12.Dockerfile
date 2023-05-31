@@ -33,7 +33,7 @@ RUN pip install torch torchvision --index-url https://download.pytorch.org/whl/c
 
 COPY requirements.txt ./
 RUN pip install -r requirements.txt && rm ./requirements.txt
-COPY *.sh /usr/local/bin
+COPY *.sh /usr/local/bin/
 
 LABEL maintainer="LiJianying <lijianying1998@gmail.com>"
 

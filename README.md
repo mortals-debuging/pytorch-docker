@@ -1,7 +1,7 @@
 ## Environment
 ### Tools Version Detail
-- Python version 3.8(Linux)
-- Pytorch version 1.11.0
+- Python version 3.8
+- Pytorch version 2.0
 - Cuda version 12.0
 - Cudnn version 8
 
@@ -19,5 +19,5 @@ This image has pushed to dockerhub.
 &nbsp;
 ### Docker Pull Command
 ```Shell
-docker pull mortals/codeenv:cuda11.3-cudnn8-conda
+docker pull mortals/codeenv:conda-cuda12.0
 ```
