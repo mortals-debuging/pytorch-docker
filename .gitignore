@@ -1,4 +1,5 @@
 /.idea
-/.idea/*
+/.idea/*.xml
+/.idea/inspectionProfiles/
 multimodal.dockerfile
 mynltk.py
