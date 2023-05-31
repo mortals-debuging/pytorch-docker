@@ -19,5 +19,5 @@ This image has pushed to dockerhub.
 &nbsp;
 ### Docker Pull Command
 ```Shell
-docker pull mortals/codeenv:pytorch-base
+docker pull mortals/codeenv:cuda11.3-cudnn8-conda
 ```
