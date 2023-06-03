@@ -17,22 +17,23 @@ WORKDIR $CODEDIR
 RUN rm -f /etc/apt/sources.list.d/*.list && rm -rf /var/lib/apt/lists/*
 
 # Install some basic utilities
-RUN apt-get update --fix-missing && apt-get upgrade -y  \
+RUN apt-get update && apt-get upgrade -y --fix-missing  \
     && apt-get -y --no-install-recommends install  ca-certificates libjpeg-dev libpng-dev\
     sudo git vim traceroute inetutils-ping net-tools curl fontconfig\
     libgl1 libglib2.0-dev libfontconfig libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0  \
     libxcb-shape0 libxcb-xfixes0 libxcb-xinerama0 libxcb-xkb1 libxkbcommon-x11-0 libfontconfig1 libdbus-1-3 libx11-6 \
-    openssh-server htop python3.9 python3-pip
+    openssh-server htop python3-pip
 
 # install python packages
 RUN pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
 
-#RUN mkdir /usr/share/fonts/userFonts
-#COPY ./fonts /usr/share/fonts/userFonts
-#RUN fc-cache -fv
+RUN mkdir /usr/share/fonts/userFonts
+COPY ./fonts /usr/share/fonts/userFonts
+RUN fc-cache -fv
 
 COPY requirements.txt ./
-RUN pip install -r requirements.txt && rm ./requirements.txt
+RUN pip install -r requirements.txt && rm ./requirements.txt &&\
+    pip install jupyter-tensorboard
 COPY *.sh /usr/local/bin/
 
 LABEL maintainer="LiJianying <lijianying1998@gmail.com>"
