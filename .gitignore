@@ -1,4 +1,5 @@
 /fonts/
+/fonts/*
 /.idea/
 /.idea/*
 multimodal.dockerfile
