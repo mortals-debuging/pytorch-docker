@@ -19,7 +19,7 @@ RUN mkdir $CODEDIR
 RUN rm -f /etc/apt/sources.list.d/*.list && rm -rf /var/lib/apt/lists/*
 
 # Install some basic utilities
-RUN apt-get update --fix-missing && apt-get upgrade -y  \
+RUN apt-get update && apt-get upgrade -y --fix-missing \
     && apt-get -y --no-install-recommends install  ca-certificates libjpeg-dev libpng-dev\
     sudo git vim traceroute inetutils-ping net-tools curl fontconfig wget\
     libgl1 libglib2.0-dev libfontconfig libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0  \
@@ -27,12 +27,13 @@ RUN apt-get update --fix-missing && apt-get upgrade -y  \
     openssh-server htop python3-pip
 
 # Fonts should be here, but for some resons I couldn't provide them.
-#RUN mkdir /usr/share/fonts/userFonts
-#COPY ./fonts /usr/share/fonts/userFonts
-#RUN fc-cache -fv
+RUN mkdir /usr/share/fonts/userFonts
+COPY ./fonts /usr/share/fonts/userFonts
+RUN fc-cache -fv
 
 COPY requirements.txt ./
-RUN pip install -r requirements.txt && rm ./requirements.txt
+RUN pip install -r requirements.txt && rm ./requirements.txt &&\
+    pip install jupyter-tensorboard
 COPY *.sh /usr/local/bin/
 
 # Install conda
@@ -46,6 +47,7 @@ RUN /opt/conda/bin/conda clean -tipy && \
 ENV PATH /opt/conda/bin:$PATH
 
 RUN conda init bash
+
 
 LABEL maintainer="LiJianying <lijianying1998@gmail.com>"
 
