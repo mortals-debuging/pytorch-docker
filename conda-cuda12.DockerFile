@@ -1,5 +1,5 @@
 #
-#包含了conda的镜像，基于Ubuntu2204构建，并在Windows11 上的WSL2 上构建。支持WSLg。
+#包含了conda的镜像，基于Ubuntu2004构建，并在Windows11 上的WSL2 上构建。支持WSLg。
 #由于docker镜像一般都是最精简的，所以会有一些必要的运行库缺失，本镜像补充安装了缺失的运行库。
 #这里已经提前安装了Jupyter和SSH启动配置。
 #终端中输入 sshstart.sh 即可开启ssh服务。输入jupyter.sh 即可开启jupyter服务。
