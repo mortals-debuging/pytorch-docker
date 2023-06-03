@@ -1,8 +1,4 @@
 /fonts/
-/fonts/*.fon
-/fonts/*.ttf
-/fonts/*.TTF
 /.idea/
-/.idea/*
 multimodal.dockerfile
 mynltk.py
