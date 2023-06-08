@@ -1,12 +1,37 @@
 #!/bin/bash
 
-if (cat /etc/ssh/ssh_config|grep "^    PermitRootLogin yes"); then cd .; else  sed -i "$ a \    PermitRootLogin yes" /etc/ssh/sshd_config; fi
-if (cat /etc/ssh/ssh_config|grep "^    UsePAM no"); then cd .; else  sed -i "$ a \    UsePAM no" /etc/ssh/sshd_config; fi
-if (cat ~/.bashrc|grep "^ \service ssh start"); then
-  cd .;
-  else
-    sed -i "$ a \service ssh start" ~/.bashrc
-    service ssh start
-    echo -e "\e[1;7;31mPlease set your password! \nPlease set your password! \nPlease set your password! \e[0m";
-    passwd
+ssh_command="^service ssh start"
+profile_file="/etc/profile"
+root_profile_file="/root/.profile"
+ssh_config_file="/etc/ssh/ssh_config"
+use_pam_option="UsePAM no"
+
+# Check if the "UsePAM no" option is present in /etc/ssh/ssh_config
+if grep -q "^$use_pam_option" "$ssh_config_file"; then
+    echo "UsePAM is already set to no in ssh_config."
+else
+    if grep -q "^#UsePAM" "$ssh_config_file"; then
+        # Uncomment the UsePAM option
+        sudo sed -i 's/^#UsePAM.*/UsePAM no/' "$ssh_config_file"
+    else
+        # Add the UsePAM option at the end of the file
+        echo "$use_pam_option" | sudo tee -a "$ssh_config_file" >/dev/null
+    fi
+    echo "UsePAM option added to ssh_config."
+fi
+
+# Check if the "service ssh start" command is present in /etc/profile or /root/.profile
+if grep -q "$ssh_command" "$profile_file" || grep -q "$ssh_command" "$root_profile_file"; then
+    echo "SSH is set to start automatically."
+else
+    echo "Adding SSH startup command to /etc/profile."
+    echo "$ssh_command" >> "$profile_file"
+    printf "\e[1;31;7mPlease set your password! \nPlease set your password! \nPlease set your password! \e[0m"
+    read -p "Do you want to set a password now? (y/n) " choice
+    if [[ $choice == "y" || $choice == "Y" || $choice == "" ]]; then
+        sudo passwd "$(whoami)"
+    else
+        echo "Password setup canceled."
+        exit 1
+    fi
 fi
