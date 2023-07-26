@@ -1,3 +1,4 @@
 jupyter
+notebook == 6.5.4
 tensorboard
 pygwalker
