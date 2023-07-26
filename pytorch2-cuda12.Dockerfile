@@ -6,6 +6,9 @@
 #
 FROM nvidia/cuda:12.0.1-cudnn8-devel-ubuntu20.04
 
+ENV NVIDIA_VISIBLE_DEVICES=all NVIDIA_DRIVER_CAPABILITIES=compute,utility\
+    LD_LIBRARY_PATH=/usr/local/nvidia/lib:/usr/local/nvidia/lib64
+
 # This Env setting is aimd to display Linux-original window in Windows through WSLg.
 ENV DISPLAY=:0 CODEDIR=/opt/project XDG_RUNTIME_DIR=/usr/lib/
 
