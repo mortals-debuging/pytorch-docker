@@ -1,13 +1,13 @@
 #!/bin/bash
 
-ssh_command="^service ssh start"
+ssh_command="service ssh start"
 profile_file="/etc/profile"
 root_profile_file="/root/.profile"
 ssh_config_file="/etc/ssh/ssh_config"
 use_pam_option="UsePAM no"
 
 # Check if the "service ssh start" command is present in /etc/profile or /root/.profile
-if grep -q "$ssh_command" "$profile_file" || grep -q "$ssh_command" "$root_profile_file"; then
+if grep -q "^$ssh_command" "$profile_file" || grep -q "$ssh_command" "$root_profile_file"; then
     echo "SSH is set to start automatically."
 else
     echo "Adding SSH startup command to /etc/profile."
