@@ -35,8 +35,7 @@ COPY ./fonts /usr/share/fonts/userFonts
 RUN fc-cache -fv
 
 COPY requirements.txt ./
-RUN pip install -r requirements.txt && rm ./requirements.txt &&\
-    pip install jupyter-tensorboard
+RUN pip install -r requirements.txt && rm ./requirements.txt
 COPY *.sh /usr/local/bin/
 
 LABEL maintainer="LiJianying <lijianying1998@gmail.com>"

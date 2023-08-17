@@ -1,4 +1,4 @@
-jupyter
-notebook == 6.5.4
-tensorboard
+jupyterlab
 pygwalker
+matplotlib
+typing-extensions==4.6.3
