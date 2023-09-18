@@ -1,7 +1,2 @@
-./fonts/
+fonts/
 .idea/
-.idea/deployment.xml
-.idea/inspectionProfiles/profiles_settings.xml
-.idea/inspectionProfiles/Project_Default.xml
-multimodal.dockerfile
-mynltk.py
