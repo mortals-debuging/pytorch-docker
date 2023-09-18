@@ -4,6 +4,7 @@ ssh_command="service ssh start"
 bashrc_file="/root/.bashrc"
 ssh_config_file="/etc/ssh/sshd_config" # 注意：这里应该是sshd_config，而不是ssh_config
 root_login_option="PermitRootLogin yes"
+usepam_option="UsePAM no"
 
 # 检查"service ssh start"命令是否存在于/root/.bashrc
 if grep -q "^$ssh_command" "$bashrc_file"; then
@@ -28,6 +29,12 @@ else
             echo "$root_login_option" >> "$ssh_config_file"
         fi
         echo "Root login has been enabled."
+
+        # 在这里添加设置UsePAM为no，以避免在某些环境中（例如PyCharm）出现'open too many files'错误。
+	echo "Disabling UsePAM."
+        echo "$usepam_option" >> "$ssh_config_file"
+
         service ssh restart # 重新启动SSH服务以应用更改
+
     fi
 fi
